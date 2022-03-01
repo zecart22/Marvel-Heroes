@@ -4,10 +4,16 @@
     "@chakra-ui/react": "^1.8.5",
     "@emotion/react": "^11.8.1",
     "@emotion/styled": "^11.8.1",
-    "md5": "^2.3.0"
+    "@hookform/resolvers": "^2.8.8",
+    "md5": "^2.3.0",
+    "react-hook-form": "^7.27.1",
+    "react-icons": "^4.3.1",
+    "react-router-dom": "5",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@types/axios": "^0.14.0",
-    "@types/md5": "^2.3.2"
+    "@types/md5": "^2.3.2",
+    "@types/react-router-dom": "^5.3.3"
   }
 }
