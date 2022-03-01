@@ -10,17 +10,19 @@ interface heroes {
   id: number;
   name: string;
   thumbnail: { extension: string; path: string };
+  urls: { type: string; url: string };
+  description: string;
 }
 
 function App() {
-  const [comics, setComics] = useState([]);
+  const [Comics, setComics] = useState([]);
 
   const [Heroes, setHeroes] = useState([]);
 
   useEffect(() => {
     fetch(apiComics)
       .then((response) => response.json())
-      .then((response) => setComics(response))
+      .then((response) => setComics(response.data.results))
       .catch((err) => console.log(err));
   }, []);
 
@@ -32,6 +34,7 @@ function App() {
   }, []);
 
   console.log(Heroes);
+  console.log(Comics);
 
   return (
     <div className="App">
@@ -45,6 +48,20 @@ function App() {
               src={heroes.thumbnail.path + "." + heroes.thumbnail.extension}
               alt="imagem"
             />
+            <div>{heroes.description}</div>
+          </>
+        ))}
+
+      {Comics &&
+        Comics.map((comic: heroes) => (
+          <>
+            <div>{comic.name}</div>
+            <div>{comic.id}</div>
+            <img
+              src={comic.thumbnail.path + "." + comic.thumbnail.extension}
+              alt="imagem"
+            />
+            <div>{comic.urls.url}</div>
           </>
         ))}
     </div>
