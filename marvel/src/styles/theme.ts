@@ -3,10 +3,12 @@ import { extendTheme } from "@chakra-ui/react";
 const theme = extendTheme({
   colors: {
     primary: {
-      main: "#039F61",
+      main: "#FFFF",
+      main1: "#0A0404",
     },
     secondary: {
-      main: "#EDC201",
+      main: "#EC1D24",
+      main1: "#730000",
     },
     gray: {
       0: "#f5f5f5",
@@ -63,14 +65,14 @@ const theme = extendTheme({
     },
   },
   fonts: {
-    heading: "Roboto",
+    heading: "Monoton",
     body: "Roboto",
-    bodySecondary: "Fauna One;",
+    bodySecondary: "Bungee",
   },
   styles: {
     global: {
       body: {
-        bg: "white",
+        bg: "primary.main",
         color: "gray.600",
       },
     },
