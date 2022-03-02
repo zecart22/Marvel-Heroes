@@ -8,10 +8,10 @@ import {
   useDisclosure,
   useMediaQuery,
 } from "@chakra-ui/react";
-import { useRef } from "react";
+/* import { useRef } from "react"; */
 import { FaUserCircle } from "react-icons/fa";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { useHistory, useLocation, useParams } from "react-router-dom";
+import { useHistory, useLocation /* , useParams */ } from "react-router-dom";
 import logo from "../../assets/images/Header/header2.png";
 import logo2 from "../../assets/images/Header/header3.png";
 import { Menu } from "./Menu";

@@ -28,7 +28,7 @@ type inputVariationOptions = {
 
 const inputVariation: inputVariationOptions = {
   error: "negative.main",
-  default: "rgba(25, 245, 154, 0.17)",
+  default: "information.main",
   success: "success.main",
 };
 
@@ -60,22 +60,22 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
           id={name}
           name={name}
           onChangeCapture={(e) => setValue(e.currentTarget.value)}
-          bgColor="rgba(25, 245, 154, 0.17)"
-          boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
+          bgColor="primary.main"
+          boxShadow="0px 4px 4px primary.main1"
           borderColor={inputVariation[variation]}
           border="2px solid"
           _placeholder={{ color: "gray.300" }}
           _focus={
             variation === "default"
               ? {
-                  borderColor: "#039F61",
+                  borderColor: "primary.main",
                 }
               : {
                   borderColor: `${inputVariation[variation]}`,
                 }
           }
           _hover={{
-            borderColor: "#039F61",
+            borderColor: "primary.main",
           }}
           variant="outline"
           size="lg"
