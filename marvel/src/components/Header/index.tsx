@@ -31,7 +31,6 @@ export const Header = () => {
     <Flex
       h="72px"
       flexDirection="row"
-      border="1px solid black"
       justifyContent="space-between"
       px="5"
       py="1"
@@ -45,7 +44,8 @@ export const Header = () => {
         <>
           <Flex>
             <Center>
-              <Image src={logo2 + logo} h="72px" w="89" />
+              <Image src={logo2} h="40px" w="47" />
+              <Image src={logo} h="42px" w="59" />
               {/* <Image src={logo} h="72px" w="89" /> */}
             </Center>
           </Flex>
@@ -76,7 +76,8 @@ export const Header = () => {
             </Center>
 
             <Center>
-              <Image src={logo2 + logo} h="72px" w="89" />
+              <Image src={logo2} h="40px" w="47" ml="25px" />
+              <Image src={logo} h="42px" w="59" />
             </Center>
           </Flex>
           <Menu isOpen={isOpen} onClose={onClose} />

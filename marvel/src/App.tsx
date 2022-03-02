@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-no-comment-textnodes */
-import React from "react";
+/* import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import { Url } from "url";
@@ -64,6 +64,20 @@ function App() {
             <div>{comic.urls.url}</div>
           </>
         ))}
+    </div>
+  );
+}
+
+export default App; */
+
+import "./App.css";
+import Routes from "./routes";
+
+
+function App() {
+  return (
+    <div>
+      <Routes />
     </div>
   );
 }

@@ -1,4 +1,5 @@
 import md5 from "md5";
+import axios from "axios";
 
 const publicKey = "6221ced41d8dae9b7c81098342271c5a";
 
@@ -15,3 +16,9 @@ const heroesURL = `http://gateway.marvel.com/v1/public/characters?ts=${dateTime}
 export const apiComics = comicsURL;
 
 export const apiHeroes = heroesURL;
+
+const apiRegister = axios.create({
+  baseURL: "https://kenziehub.herokuapp.com",
+});
+
+export default apiRegister;
