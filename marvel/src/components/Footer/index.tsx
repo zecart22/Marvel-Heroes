@@ -10,6 +10,7 @@ import {
   useMediaQuery,
 } from "@chakra-ui/react";
 import { FaLinkedin } from "react-icons/fa";
+import { FaGithub } from "react-icons/fa";
 import { useRef } from "react";
 import { FaUserCircle } from "react-icons/fa";
 import { useHistory, useLocation, useParams } from "react-router-dom";
@@ -32,23 +33,21 @@ export const Footer = () => {
     <Flex
       h="72px"
       flexDirection="row"
-      border="1px solid black"
       justifyContent="space-between"
       px="5"
       py="1"
       bg="secondary.main1"
       boxShadow="0px 1px 4px"
-      position="fixed"
+      position="absolute"
       width="100%"
-      zIndex="100"
+      zIndex="auto"
     >
       {isLargerThan769 ? (
         <>
           <Flex>
-            <Center flexDirection="column" marginY={10} width="250px">
+            <Center flexDirection="row" marginY={10} width="250px">
               {/*  <Avatar size="2xl" src={robert} /> */}
               <Flex gap="10px" alignItems="center">
-                <Text textStyle="h1">Robert Pupo</Text>
                 <Link
                   href="https://www.linkedin.com/in/robertpupo/"
                   isExternal
@@ -59,11 +58,21 @@ export const Footer = () => {
                   </Center>
                 </Link>
               </Flex>
-              <Text textStyle="headline">Quality Assurance</Text>
-
-              <Image src={logoGit} h="72px" w="89" />
-              <Image src={logoLinkedin} h="72px" w="89" />
-              <Image src={logoMarvel} h="72px" w="89" />
+              <Center>
+                <Image src={logoGit} h="37px" w="42" />
+              </Center>
+              <Center>
+                <Image src={logoLinkedin} h="37px" w="42" />
+              </Center>
+              <Center>
+                <Image
+                  src={logoMarvel}
+                  h="37px"
+                  w="42"
+                  position="absolute"
+                  left="250px"
+                />
+              </Center>
             </Center>
           </Flex>
         </>
@@ -71,14 +80,68 @@ export const Footer = () => {
         <></>
       )}
 
-      <Flex>
-        <Center
-          flexDirection="column"
-          as="button"
-          onClick={() => history.push("/login")}
-        >
-          <FaUserCircle style={{ width: "27px", height: "28px" }} />
-          <Text>Login</Text>
+      <Flex justifyContent="space-between">
+        <Center>
+          <Text
+            fontSize="10px"
+            color="#FFF"
+            position="absolute"
+            left="30px"
+            bottom="48px"
+          >
+            {" "}
+            Desenvolvido por Robert Pupo
+          </Text>
+        </Center>
+        <Center>
+          <Link href="https://github.com/zecart22" isExternal color="#0e76a8">
+            <Image
+              src={logoGit}
+              h="27px"
+              w="42"
+              position="absolute"
+              left="50px"
+              bottom="15px"
+            />
+          </Link>
+        </Center>
+        <Center>
+          <Link
+            href="https://www.linkedin.com/in/robertpupo/"
+            isExternal
+            color="#0e76a8"
+          >
+            <Image
+              src={logoLinkedin}
+              h="27px"
+              w="42"
+              position="absolute"
+              left="100px"
+              bottom="15px"
+            />
+          </Link>
+        </Center>
+        <Center flexDirection="column">
+          <Text
+            fontSize="10px"
+            color="#FFF"
+            position="absolute"
+            left="250px"
+            bottom="48px"
+          >
+            {" "}
+            Oficial API :
+          </Text>
+          <Link href="https://developer.marvel.com/" isExternal color="#0e76a8">
+            <Image
+              src={logoMarvel}
+              h="37px"
+              w="42"
+              position="absolute"
+              left="250px"
+              bottom="10px"
+            />
+          </Link>
         </Center>
       </Flex>
     </Flex>

@@ -32,7 +32,10 @@ const ButtonBase: ForwardRefRenderFunction<HTMLButtonElement, ButtonProps> = (
           filter: "brightness(120%)",
         }}
         _active={{
-          border: "1px solid primary.main",
+          border: "2px solid primary.main",
+          _hover: {
+            bg: "#FFFF",
+          },
         }}
         {...rest}
       >
