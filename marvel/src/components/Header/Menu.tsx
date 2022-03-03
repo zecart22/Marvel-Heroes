@@ -30,7 +30,7 @@ export const Menu = ({ isOpen, onClose }: IMenuProps) => {
         <DrawerHeader borderBottomWidth="1px">LAB MARVEL</DrawerHeader>
         <DrawerBody>
           <VStack spacing="5">
-            <Text as="button">
+            <Text color="#FFFF" as="button">
               {isHome ? (
                 <Link href="#">INICIO</Link>
               ) : (

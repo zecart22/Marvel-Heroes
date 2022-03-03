@@ -49,7 +49,7 @@ export const Header = () => {
               {/* <Image src={logo} h="72px" w="89" /> */}
             </Center>
           </Flex>
-          <Flex alignItems="flex-end">
+          <Flex alignItems="flex-end" color="primary.main">
             <HStack spacing="5">
               <Text as="button" _hover={{ transform: "translateY(-4px)" }}>
                 {isHome ? (
