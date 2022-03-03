@@ -77,6 +77,7 @@ export const Home = () => {
                   </Text>
                   <Button
                     mt="20px"
+                    w="490px"
                     onClick={() => history.push("/login")}
                     children={"Logar!"}
                   ></Button>
