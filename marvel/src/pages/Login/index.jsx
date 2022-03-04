@@ -6,23 +6,54 @@ import {
   Text,
   Center,
   Image,
+  Input,
   useToast,
   VStack,
   Box,
   useMediaQuery,
 } from "@chakra-ui/react";
 import spider from "../../assets/images/login/log2.png";
+import ben from "../../assets/images/login/log55.png";
 import city from "../../assets/images/login/log22.jpg";
 import { Header } from "../../components/Header";
 import { Button } from "../../components/Button";
-import { Input } from "../../components/Input";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useHistory } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
+import GoogleLogin from "react-google-login";
+import { useState } from "react";
 
-export const Login = () => {
+export const Login = ({ autenticador, setAutenticador }) => {
   const [isLargerThan769] = useMediaQuery("(min-width: 769px)");
+
+  const [name, setName] = useState();
+
+  const [email, setEmail] = useState();
+
+  const [image, setImage] = useState();
+
+  const [isLoged, setIsLoged] = useState(false);
+
+  const responseGoogle = (response) => {
+    console.log(response);
+    const {
+      profileObj: { name, email, imageUrl },
+    } = response;
+    setName(name);
+    setEmail(email);
+    setImage(imageUrl);
+    setIsLoged(true);
+    setAutenticador(true);
+  };
+
+  const failureResponseGoogle = (response) => {
+    console.log();
+  };
+
+  if (autenticador) {
+    return <Redirect to="/Dashboard" />;
+  }
 
   return (
     <>
@@ -70,25 +101,24 @@ export const Login = () => {
                 LOGIN
               </Heading>
               <VStack mt="8" spacing="10">
-                <input placeholder="Digite seu email" />
-                <input placeholder="Digite sua senha" type="password" />
-                <Text>
-                  Novo por aqui? <br />{" "}
-                  <Link color="primary.main" href="/signup">
-                    Clique aqui
-                  </Link>{" "}
-                  e faça seu cadastro
-                </Text>
-                <Button
-                  type="submit"
-                  width="560px"
-                  color="primary.main"
-                  bg="secondary.main1"
-                  Weight="400"
-                  cursor="pointer"
+                <Text
+                  fontSize={["28px", "28px", "10px", "28px"]}
+                  mt="40px"
+                  ml="70px"
+                  fontFamily="body"
                 >
-                  GO!
-                </Button>
+                  Faça o login direto com sua conta Google
+                  <br />
+                  simples e rápido !
+                  <br />
+                  <br />
+                </Text>
+                <GoogleLogin
+                  clientId="676134593457-o5bc3kpqnbt7t2ae0o55d3upnslc8q0j.apps.googleusercontent.com"
+                  buttonText="Logar com Google"
+                  onSuccess={responseGoogle}
+                  onFailure={failureResponseGoogle}
+                />
               </VStack>
             </Grid>
 
@@ -105,6 +135,15 @@ export const Login = () => {
                 <br />
                 Tio Been
               </Text>
+              <Image
+                src={ben}
+                w="400px"
+                h="450px"
+                pos="absolute"
+                top="498px"
+                ml="120px"
+                opacity="50%"
+              />
             </Center>
           </Flex>
         </>
@@ -139,8 +178,17 @@ export const Login = () => {
                 LOGIN
               </Heading>
               <VStack mt="8" spacing="10">
-                <input placeholder="Digite seu email" />
-                <input placeholder="Digite sua senha" type="password" />
+                <Input
+                  bg="primary.main"
+                  w="400px"
+                  placeholder="Digite seu email"
+                />
+                <Input
+                  bg="primary.main"
+                  w="400px"
+                  placeholder="Digite sua senha"
+                  type="password"
+                />
                 <Text>
                   Novo por aqui? <br />{" "}
                   <Link color="primary.main" href="/signup">

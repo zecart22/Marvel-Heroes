@@ -24,7 +24,7 @@ const Routes = () => {
       </Route>
 
       <Route exact path="/login">
-        <Login autenticador={autenticador} />
+        <Login autenticador={autenticador} setAutenticador={setAutenticador} />
       </Route>
 
       <Route path="/signup">
@@ -35,10 +35,7 @@ const Routes = () => {
       </Route>
 
       <Route path="/Dashboard">
-        <Dashboard
-          autenticador={autenticador}
-          setAutenticador={setAutenticador}
-        />
+        <Dashboard autenticador={autenticador} />
       </Route>
 
       <Route path="/games">

@@ -7,21 +7,77 @@ import {
   Center,
   Image,
   useToast,
+  Input,
   VStack,
   Box,
+  FormControl,
   useMediaQuery,
 } from "@chakra-ui/react";
 import tony from "../../assets/images/signup/sgup1.png";
 import { Header } from "../../components/Header";
 import { Button } from "../../components/Button";
-import { Input } from "../../components/Input";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useHistory } from "react-router-dom";
+import apiRegister from "../../services";
+import { Redirect, useHistory } from "react-router";
 
-export const Signup = () => {
+export const Signup = ({ autenticador }) => {
   const [isLargerThan769] = useMediaQuery("(min-width: 769px)");
+
+  const formSchema = yup.object().shape({
+    name: yup.string().required("Nome obrigatório"),
+
+    email: yup.string().required("Email obrigatório").email("email inválido"),
+
+    password: yup
+      .string()
+      .required("Campo obrigatório")
+      .min(6, "Minimo de 6 caracteres"),
+
+    passwordConfirm: yup
+      .string()
+      .oneOf([yup.ref("password")], "Senhas diferentes, tente novamente")
+      .required("Campo obrigatório"),
+
+    contact: yup
+      .string()
+      .matches(
+        /^(?:(?:\+|00)?(55)\s?)?(?:\(?([1-9][0-9])\)?\s?)?(?:((?:9\d|[2-9])\d{3})\-?(\d{4}))$/,
+        "Tefone inválido"
+      )
+      .required("Telefone obrigatório"),
+
+    /*  bio: yup.string().required(" Bio obrigatória ") */
+  });
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(formSchema),
+  });
+
+  const onSubmitFunction = ({
+    name,
+    email,
+    password,
+    bio,
+    contact,
+    course_module,
+  }) => {
+    const user = { name, email, password, bio, contact, course_module };
+    console.log(user);
+    apiRegister
+      .post("/users", user)
+      .then((response) => console.log(response.data))
+      .catch((err) => console.log(err));
+  };
+
+  if (autenticador) {
+    return <Redirect to="/DashBoard" />;
+  }
 
   return (
     <>
@@ -79,30 +135,62 @@ export const Signup = () => {
               >
                 CADASTRO
               </Heading>
-              <VStack mt="8" spacing="10">
-                <input placeholder="Digite nome" />
-                <input placeholder="Digite sobrenome" />
-                <input placeholder="Digite email" />
-                <input placeholder="Digite sua senha" type="password" />
-                <input placeholder="Confirme sua senha" type="password" />
-                <Text>
-                  Já tem cadastro ? <br />{" "}
-                  <Link color="primary.main" href="/login">
-                    Clique aqui
-                  </Link>{" "}
-                  para logar.
-                </Text>
-                <Button
-                  type="submit"
-                  width="560px"
-                  color="primary.main"
-                  bg="secondary.main1"
-                  Weight="400"
-                  cursor="pointer"
+              <form>
+                <VStack
+                  mt="8"
+                  spacing="10"
+                  onSubmit={handleSubmit(onSubmitFunction)}
                 >
-                  GO!
-                </Button>
-              </VStack>
+                  <Input
+                    bg="primary.main"
+                    register={register}
+                    placeholder="Nome"
+                    {...register("name")}
+                  />
+                  <p>{errors.name?.message}</p>
+                  <Input
+                    bg="primary.main"
+                    register={register}
+                    placeholder="Email"
+                    {...register("email")}
+                  />
+                  <p>{errors.email?.message}</p>
+                  <Input
+                    bg="primary.main"
+                    placeholder="Senha"
+                    type="password"
+                    {...register("password")}
+                  />
+                  <p>{errors.password && errors.password?.message}</p>
+                  <Input
+                    bg="primary.main"
+                    placeholder="Confirmar senha"
+                    type="password"
+                    {...register("passwordConfirm")}
+                  />
+                  <p>
+                    {errors.passwordConfirm && errors.passwordConfirm?.message}
+                  </p>
+
+                  <Text>
+                    Já tem cadastro ? <br />{" "}
+                    <Link color="primary.main" href="/login">
+                      Clique aqui
+                    </Link>{" "}
+                    para logar.
+                  </Text>
+                  <Button
+                    type="submit"
+                    width="560px"
+                    color="primary.main"
+                    bg="secondary.main1"
+                    Weight="400"
+                    cursor="pointer"
+                  >
+                    GO!
+                  </Button>
+                </VStack>
+              </form>
             </Grid>
             <Center>
               <Image
@@ -148,11 +236,19 @@ export const Signup = () => {
                 CADASTRO
               </Heading>
               <VStack mt="8" spacing="10">
-                <input placeholder="Digite nome" />
-                <input placeholder="Digite sobrenome" />
-                <input placeholder="Digite email" />
-                <input placeholder="Digite sua senha" type="password" />
-                <input placeholder="Confirme sua senha" type="password" />
+                <Input bg="primary.main" placeholder="Digite nome" />
+                <Input bg="primary.main" placeholder="Digite sobrenome" />
+                <Input bg="primary.main" placeholder="Digite email" />
+                <Input
+                  bg="primary.main"
+                  placeholder="Digite sua senha"
+                  type="password"
+                />
+                <Input
+                  bg="primary.main"
+                  placeholder="Confirme sua senha"
+                  type="password"
+                />
 
                 <Text fontSize="30px">
                   Já tem cadastro? <br />{" "}
