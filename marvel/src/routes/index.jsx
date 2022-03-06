@@ -3,7 +3,7 @@ import { Dashboard } from "../pages/Dashboard";
 import { Games } from "../pages/Games";
 import { Home } from "../pages/Home";
 import { Login } from "../pages/Login";
-import { Signup } from "../pages/Signup";
+import { Contact } from "../pages/Contact";
 
 import { useEffect, useState } from "react";
 
@@ -27,11 +27,8 @@ const Routes = () => {
         <Login autenticador={autenticador} setAutenticador={setAutenticador} />
       </Route>
 
-      <Route path="/signup">
-        <Signup
-          autenticador={autenticador}
-          setAutenticador={setAutenticador}
-        ></Signup>
+      <Route path="/contact">
+        <Contact />
       </Route>
 
       <Route path="/Dashboard">

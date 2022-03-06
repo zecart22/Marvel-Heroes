@@ -58,6 +58,9 @@ const ButtonBase: ForwardRefRenderFunction<HTMLButtonElement, ButtonProps> = (
         }}
         _active={{
           border: "1px solid primary.main",
+          _hover: {
+            bg: "#FFFF",
+          },
         }}
         {...rest}
       >
