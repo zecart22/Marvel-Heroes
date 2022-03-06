@@ -60,9 +60,9 @@ export const Header = () => {
               </Text>
               <Text as="button" _hover={{ transform: "translateY(-4px)" }}>
                 {isHome ? (
-                  <Link onClick={() => history.push("/signup")}>CADASTRO</Link>
+                  <Link onClick={() => history.push("/contact")}>CONTATO</Link>
                 ) : (
-                  <Link onClick={() => history.push("/signup")}>CADASTRO</Link>
+                  <Link onClick={() => history.push("/contact")}>CONTATO</Link>
                 )}
               </Text>
             </HStack>

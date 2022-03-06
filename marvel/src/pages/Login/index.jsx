@@ -102,6 +102,7 @@ export const Login = ({ autenticador, setAutenticador }) => {
               </Heading>
               <VStack mt="8" spacing="10">
                 <Text
+                  color="primary.main"
                   fontSize={["28px", "28px", "10px", "28px"]}
                   mt="40px"
                   ml="70px"
@@ -135,15 +136,6 @@ export const Login = ({ autenticador, setAutenticador }) => {
                 <br />
                 Tio Been
               </Text>
-              <Image
-                src={ben}
-                w="400px"
-                h="450px"
-                pos="absolute"
-                top="498px"
-                ml="120px"
-                opacity="50%"
-              />
             </Center>
           </Flex>
         </>
@@ -159,7 +151,7 @@ export const Login = ({ autenticador, setAutenticador }) => {
           >
             <Grid
               as="form"
-              width="600px"
+              width="350px"
               alignItems="center"
               paddingX={[4, 4, 10, 10]}
               paddingY={8}
@@ -178,34 +170,24 @@ export const Login = ({ autenticador, setAutenticador }) => {
                 LOGIN
               </Heading>
               <VStack mt="8" spacing="10">
-                <Input
-                  bg="primary.main"
-                  w="400px"
-                  placeholder="Digite seu email"
-                />
-                <Input
-                  bg="primary.main"
-                  w="400px"
-                  placeholder="Digite sua senha"
-                  type="password"
-                />
-                <Text>
-                  Novo por aqui? <br />{" "}
-                  <Link color="primary.main" href="/signup">
-                    Clique aqui
-                  </Link>{" "}
-                  e faça seu cadastro
-                </Text>
-                <Button
-                  type="submit"
-                  width="560px"
+                <Text
                   color="primary.main"
-                  bg="secondary.main1"
-                  Weight="400"
-                  cursor="pointer"
+                  fontSize={["28px", "28px", "10px", "28px"]}
+                  mt="40px"
+                  fontFamily="body"
                 >
-                  GO!
-                </Button>
+                  Faça o login direto com sua conta Google simples e rápido !
+                  <br />
+                  <br />
+                  <br />
+                </Text>
+
+                <GoogleLogin
+                  clientId="676134593457-o5bc3kpqnbt7t2ae0o55d3upnslc8q0j.apps.googleusercontent.com"
+                  buttonText="Logar com Google"
+                  onSuccess={responseGoogle}
+                  onFailure={failureResponseGoogle}
+                />
               </VStack>
             </Grid>
           </Flex>
