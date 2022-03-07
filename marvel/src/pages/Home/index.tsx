@@ -1,22 +1,19 @@
 import { Header } from "../../components/Header";
-import { Footer } from "../../components/Footer";
+
 import { Button } from "../../components/Button";
 import logan from "../../assets/images/home/home4.png";
 import thanos from "../../assets/images/home/home3.png";
-import imageHeaderFront from "../../assets/images/home/home88.png";
+
 import imageHeaderBack from "../../assets/images/home/home888.png";
-import { useHistory, useLocation } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import {
   Box,
   Heading,
   VStack,
   Center,
   Flex,
-  HStack,
   Image,
-  Link,
   Text,
-  useDisclosure,
   useMediaQuery,
 } from "@chakra-ui/react";
 
