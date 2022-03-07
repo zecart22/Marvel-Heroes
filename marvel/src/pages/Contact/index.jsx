@@ -6,19 +6,14 @@ import {
   Text,
   Center,
   Image,
-  useToast,
-  Input,
-  VStack,
-  Box,
-  FormControl,
   useMediaQuery,
 } from "@chakra-ui/react";
 import tony from "../../assets/images/signup/sgup1.png";
 import { Header } from "../../components/Header";
-import { Button } from "../../components/Button";
-import ContactForm from "../../components/ContactForm/contactForm";
 
-export const Contact = () => {
+import logoMarvel from "../../assets/images/Header/header2.png";
+
+export const OficialApi = () => {
   const [isLargerThan769] = useMediaQuery("(min-width: 769px)");
 
   return (
@@ -72,18 +67,16 @@ export const Contact = () => {
             >
               <Heading
                 color="primary.main"
-                fontFamily="Fauna One"
                 text-shadow="0px 10px 10px rgba(0, 0, 0, 0.25)"
               >
-                CONTATO
+                <Link
+                  href="https://developer.marvel.com/"
+                  isExternal
+                  color="primary.main"
+                >
+                  API OFICIAL
+                </Link>
               </Heading>
-
-              <VStack mt="8" spacing="10">
-                <Text color="primary.main">
-                  Entre em contato conosco. <br /> Envie sua menssagem
-                </Text>
-                <ContactForm />
-              </VStack>
             </Grid>
             <Center>
               <Image
@@ -126,14 +119,21 @@ export const Contact = () => {
                 fontFamily="Fauna One"
                 text-shadow="0px 10px 10px rgba(0, 0, 0, 0.25)"
               >
-                CONTATO
+                API OFICIAL
               </Heading>
-              <VStack mt="8" spacing="10">
-                <Text fontSize="30px">
-                  Entre em contato conosco <br /> Envie sua menssagem.
-                </Text>
-                <ContactForm />
-              </VStack>
+              <Link
+                href="https://developer.marvel.com/"
+                isExternal
+                color="primary.main"
+              >
+                <Image
+                  src={logoMarvel}
+                  h="80px"
+                  w="300px"
+                  /*  ml="270px"
+                  mt="60px" */
+                />
+              </Link>
             </Grid>
           </Flex>
         </>

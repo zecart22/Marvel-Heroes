@@ -2,25 +2,17 @@ import {
   Flex,
   Grid,
   Heading,
-  Link,
   Text,
   Center,
   Image,
-  Input,
-  useToast,
   VStack,
-  Box,
   useMediaQuery,
 } from "@chakra-ui/react";
 import spider from "../../assets/images/login/log2.png";
-import ben from "../../assets/images/login/log55.png";
-import city from "../../assets/images/login/log22.jpg";
+
 import { Header } from "../../components/Header";
-import { Button } from "../../components/Button";
-import { useForm } from "react-hook-form";
-import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { Redirect, useHistory } from "react-router-dom";
+
+import { Redirect } from "react-router-dom";
 import GoogleLogin from "react-google-login";
 import { useState } from "react";
 

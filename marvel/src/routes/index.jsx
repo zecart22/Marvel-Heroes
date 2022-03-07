@@ -1,9 +1,9 @@
 import { Route, Switch } from "react-router";
 import { Dashboard } from "../pages/Dashboard";
-import { Games } from "../pages/Games";
+
 import { Home } from "../pages/Home";
 import { Login } from "../pages/Login";
-import { Contact } from "../pages/Contact";
+import { OficialApi } from "../pages/Contact";
 
 import { useEffect, useState } from "react";
 
@@ -27,16 +27,15 @@ const Routes = () => {
         <Login autenticador={autenticador} setAutenticador={setAutenticador} />
       </Route>
 
-      <Route path="/contact">
-        <Contact />
+      <Route path="/oficialapi">
+        <OficialApi />
       </Route>
 
       <Route path="/Dashboard">
-        <Dashboard autenticador={autenticador} />
-      </Route>
-
-      <Route path="/games">
-        <Games autenticador={autenticador} setAutenticador={setAutenticador} />
+        <Dashboard
+          autenticador={autenticador}
+          setAutenticador={setAutenticador}
+        />
       </Route>
     </Switch>
   );

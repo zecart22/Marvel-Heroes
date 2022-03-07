@@ -1,4 +1,4 @@
-import { Box, Button, Center, Image, Text, VStack } from "@chakra-ui/react";
+import { Box, Center, Image, Text, VStack } from "@chakra-ui/react";
 import gifbg from "../../assets/images/dashboard/dash2.gif";
 
 interface GameCardProps {

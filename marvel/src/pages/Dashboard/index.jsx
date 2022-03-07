@@ -4,8 +4,12 @@ import { ComicsCard } from "../../components/ComicsCard";
 import head_comics from "../../assets/images/dashboard/dash22.jpg";
 import head_heroes from "../../assets/images/dashboard/dash88.png";
 import head_games from "../../assets/images/jogos/game.png";
-import { useHistory, useLocation } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { useEffect } from "react";
+import { Redirect } from "react-router-dom";
+import { useState } from "react";
+import { apiComics, apiHeroes } from "../../services";
+
 import {
   Box,
   VStack,
@@ -13,17 +17,12 @@ import {
   Flex,
   HStack,
   Image,
-  Link,
   Stack,
-  Text,
   useMediaQuery,
-  border,
+  Input,
 } from "@chakra-ui/react";
 
-import { useState } from "react";
-import { apiComics, apiHeroes } from "../../services";
-
-interface heroes {
+/* interface heroes {
   id: number;
   title: string;
   name: string;
@@ -32,9 +31,9 @@ interface heroes {
   description: string;
   creators: { items: { name: string } };
   pageCount: number;
-}
+} */
 
-export const Dashboard = () => {
+export const Dashboard = ({ autenticador, setAtenticator }) => {
   const history = useHistory();
 
   const [isLargerThan769] = useMediaQuery("(min-width: 821px)");
@@ -43,15 +42,23 @@ export const Dashboard = () => {
 
   const [isheroes, setIsHeroes] = useState(false);
 
-  const [isgames, setIsGames] = useState(false);
-
-  const [isResearch, setIsResearch] = useState(false);
+  const [isSearch, setIsSearch] = useState(false);
 
   const [comics, setComics] = useState([]);
 
   const [heroes, setHeroes] = useState([]);
 
   const [principalheader, setPrincipalHeader] = useState(head_comics);
+
+  const [searchName, setSearchName] = useState("");
+
+  const [searchItem, setSearchItem] = useState([]);
+
+  const filtrado = heroes.filter(function (hero) {
+    if (hero.name === searchItem) {
+      return hero;
+    }
+  });
 
   useEffect(() => {
     fetch(apiComics)
@@ -73,7 +80,7 @@ export const Dashboard = () => {
   function changeComics() {
     setPrincipalHeader(head_comics);
     setIsHeroes(false);
-    setIsGames(false);
+    setIsSearch(false);
     setIsComics(true);
   }
 
@@ -81,14 +88,19 @@ export const Dashboard = () => {
     setPrincipalHeader(head_heroes);
     setIsHeroes(true);
     setIsComics(false);
-    setIsGames(false);
+    setIsSearch(false);
   }
 
-  function changeGames() {
+  function changeSearch() {
     setPrincipalHeader(head_games);
+    setSearchItem(searchName);
     setIsHeroes(false);
     setIsComics(false);
-    setIsGames(true);
+    setIsSearch(true);
+  }
+
+  if (!autenticador) {
+    return <Redirect to="/login" />;
   }
 
   return (
@@ -116,21 +128,37 @@ export const Dashboard = () => {
                     _hover={{ transform: "translateY(-4px)" }}
                     onClick={() => changeComics()}
                     children={"COMICS"}
-                    bg="secondary.main1"
+                    bg="secondary.main"
                     boxShadow="lg"
                   ></Button>
                   <Button
                     _hover={{ transform: "translateY(-4px)" }}
                     onClick={() => changeHeroes()}
-                    children={"HEROES"}
+                    children={"PERSONAGENS"}
                     boxShadow="lg"
                   ></Button>
-                  <Button
-                    _hover={{ transform: "translateY(-4px)" }}
-                    onClick={() => changeGames()}
-                    children={"GAMES"}
-                    boxShadow="lg"
-                  ></Button>
+                  <Box justifyContent="column" w="500px">
+                    <Input
+                      placeholder="procure seu personagem pelo nome"
+                      size="lg"
+                      type="text"
+                      value={searchName}
+                      onChange={(event) => setSearchName(event.target.value)}
+                    />
+                    <HStack spacing="20">
+                      <Button
+                        focusBorderColor="secondary.main"
+                        position="absolute"
+                        ml="450px"
+                        mb="48px"
+                        w="50px"
+                        _hover={{ transform: "translateY(-2px)" }}
+                        onClick={() => changeSearch()}
+                        children={"go!"}
+                        boxShadow="lg"
+                      ></Button>
+                    </HStack>
+                  </Box>
                 </HStack>
               </Center>
             </VStack>
@@ -143,7 +171,7 @@ export const Dashboard = () => {
               {iscomics ? (
                 <>
                   {comics &&
-                    comics.map((comic: heroes) => (
+                    comics.map((comic) => (
                       <>
                         <ComicsCard
                           name={comic.title}
@@ -165,7 +193,24 @@ export const Dashboard = () => {
               {isheroes ? (
                 <>
                   {heroes &&
-                    heroes.map((hero: heroes) => (
+                    heroes.map((hero) => (
+                      <>
+                        <ComicsCard
+                          name={hero.name}
+                          image={
+                            hero.thumbnail.path + "." + hero.thumbnail.extension
+                          }
+                          year={0}
+                          description={hero.description}
+                          price={20}
+                        ></ComicsCard>
+                      </>
+                    ))}
+                </>
+              ) : (
+                <>
+                  {filtrado &&
+                    filtrado.map((hero) => (
                       <>
                         <ComicsCard
                           name={hero.name}
@@ -179,8 +224,6 @@ export const Dashboard = () => {
                       </>
                     ))}
                 </>
-              ) : (
-                <></>
               )}
 
               {/* </HStack> */}
@@ -211,7 +254,7 @@ export const Dashboard = () => {
                 ></Button>
                 <Button
                   mt="20px"
-                  onClick={() => changeGames()}
+                  onClick={() => changeSearch()}
                   children={"GAMES"}
                   _hover={{ transform: "translateX(-4px)" }}
                   boxShadow="lg"
@@ -228,7 +271,7 @@ export const Dashboard = () => {
                 {iscomics ? (
                   <>
                     {comics &&
-                      comics.map((comic: heroes) => (
+                      comics.map((comic) => (
                         <>
                           <ComicsCard
                             name={comic.title}
@@ -250,7 +293,7 @@ export const Dashboard = () => {
                 {isheroes ? (
                   <>
                     {heroes &&
-                      heroes.map((hero: heroes) => (
+                      heroes.map((hero) => (
                         <>
                           <ComicsCard
                             name={hero.name}

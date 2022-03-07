@@ -1,27 +1,22 @@
 import {
   Center,
   Flex,
-  HStack,
   Image,
   Link,
   Text,
-  Avatar,
   useDisclosure,
   useMediaQuery,
 } from "@chakra-ui/react";
 import { FaLinkedin } from "react-icons/fa";
-import { FaGithub } from "react-icons/fa";
-import { useRef } from "react";
-import { FaUserCircle } from "react-icons/fa";
+
 import { useHistory, useLocation, useParams } from "react-router-dom";
 import logoLinkedin from "../../assets/images/footer/linkedin.png";
 import logoGit from "../../assets/images/footer/footer2.png";
 import logoMarvel from "../../assets/images/footer/footer1.png";
 
 export const Footer = () => {
-  const { isOpen, onClose, onToggle } = useDisclosure();
   const [isLargerThan769] = useMediaQuery("(min-width: 769px)");
-  const history = useHistory();
+
   const location = useLocation();
   let isHome = true;
 
